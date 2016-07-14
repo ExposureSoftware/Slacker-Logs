@@ -35,18 +35,18 @@ class LoggerProvider extends ServiceProvider
     {
         $logger = Container::getInstance()->make('log', []);
 
-        // Make sure the logger is a Writer instance
-        if($logger instanceof Writer) {
-            $monolog = $logger->getMonolog();
+        // If this is Laravel we need to get the Logger from the Writer.
+        if ($logger instanceof Writer) {
+            $logger = $logger->getMonolog();
+        }
 
-            // Make sure the Monolog Logger is returned
-            if($monolog instanceof Logger) {
-                // Create custom handler
-                $handler = new LogHandler($this->hook, $this->channel, $this->user, $this->level);
+        // Make sure the Monolog Logger is returned
+        if ($logger instanceof Logger) {
+            // Create custom handler
+            $handler = new LogHandler($this->hook, $this->channel, $this->user, $this->level);
 
-                // Push it to monolog
-                $monolog->pushHandler($handler);
-            }
+            // Push it to monolog
+            $logger->pushHandler($handler);
         }
     }
 
