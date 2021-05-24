@@ -1,3 +1,6 @@
+# !!ARCHIVED!!
+Laravel has native Slack logging intergrations that are better maintained. **Use those!**
+
 # Slacker-Logs
 Provides interface to Slack chat from Laravel/Lumen logging.
 # Installation
